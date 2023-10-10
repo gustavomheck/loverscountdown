@@ -1,11 +1,88 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
-  <title>Minha primeira página HTML</title>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contagem Regressiva</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    #countdown {
+      font-size: 2rem;
+      display: flex;
+      text-align: center;
+      align-items: center;
+    }
+    .countdown-item {
+      display: flex;
+      flex-direction: column;
+      font-size: xx-large;
+      align-items: center;
+      margin: 20px 60px 20px 20px;
+      color: palevioletred;
+    }
+    h2 {
+      color: gray;
+    }
+  </style>
 </head>
 <body>
-  <h1>Olá, mundo!</h1>
-  <p>Este é o meu primeiro código HTML.</p>
+  <h2>Contagem Regressiva</h1>
+  <div id="countdown">
+    <div class="countdown-item">
+      <span id="days">00</span>
+      <span>dias</span>
+    </div>
+    <div class="countdown-item">
+      <span id="hours">00</span>
+      <span>horas</span>
+    </div>
+    <div class="countdown-item">
+      <span id="minutes">00</span>
+      <span>minutos</span>
+    </div>
+    <div class="countdown-item">
+      <span id="seconds">00</span>
+      <span>segundos</span>
+    </div>
+  </div>
+
+  <div>
+    <img class="countdown" height="400px" src="pic2.jpg"/>
+  </div>
+
+  <script>
+    // Substitua a data de destino pela data e hora desejadas
+    const targetDate = new Date("2023-10-12T13:00:00");
+
+    // Atualize a contagem regressiva a cada segundo
+    const countdownInterval = setInterval(updateCountdown, 1000);
+
+    function updateCountdown() {
+      const currentDate = new Date();
+      const timeDifference = targetDate - currentDate;
+
+      if (timeDifference <= 0) {
+        clearInterval(countdownInterval); // Pare a contagem regressiva quando o tempo acabar
+      } else {
+        const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+        document.getElementById("days").textContent = String(days).padStart(2, '0');
+        document.getElementById("hours").textContent = String(hours).padStart(2, '0');
+        document.getElementById("minutes").textContent = String(minutes).padStart(2, '0');
+        document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
+      }
+    }
+  </script>
 </body>
 </html>
